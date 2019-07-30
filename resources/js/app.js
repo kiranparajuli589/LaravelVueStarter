@@ -4,9 +4,33 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+import { Form, HasError, AlertError } from "vform"
+import VueRouter from 'vue-router'
+import Dashboard from "./components/Dashboard";
+import Profile from "./components/Profile";
+import Users from "./components/Users";
+
+
+Vue.use(VueRouter);
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+
+
+let routes =[
+    {path: '/dashboard', component: Dashboard},
+    {path: '/profile', component: Profile},
+    {path: '/users', component: Users},
+];
+
+const router = new VueRouter({
+    mode: 'history',
+    routes // short for `routes: routes`
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,4 +53,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router
 });
